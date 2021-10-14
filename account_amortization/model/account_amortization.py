@@ -24,4 +24,30 @@
 #
 ##############################################################################
 
-from . import account_amortization
+from openerp.osv import fields, osv
+
+
+class account_asset_asset(osv.Model):
+
+    _inherit = 'account.asset.asset'
+    _description = 'Account Amortization'
+
+    _columns = {
+        'doc_type': fields.selection([('deprecation', 'Deprecation'),
+            ('amortization', 'Amortization'), ], 'Type',
+            help='''Asset type, deprecation allows you depreciate an asset, the
+                amortization allows you amortize an expense.'''),
+    }
+
+
+class account_asset_category(osv.Model):
+
+    _inherit = 'account.asset.category'
+    _description = 'Account Amortization Category'
+
+    _columns = {
+        'doc_type': fields.selection([('deprecation', 'Deprecation'),
+            ('amortization', 'Amortization'), ], 'Type',
+            help='''Asset category type, deprecation allows you depreciate an asset, the
+                amortization allows you amortize an expense.'''),
+    }
